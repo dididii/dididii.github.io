@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siwei Chen</title>
+
+    <style>
+        /* 样式用于固定左侧导航 */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 250px;
+            /* 左侧导航的宽度 */
+            height: 100%;
+            /* 占满整个视口高度 */
+            background-color: #f0f0f0;
+            /* 背景颜色 */
+            overflow-y: auto;
+            /* 如果内容高度超过导航高度，启用垂直滚动条 */
+            padding: 20px;
+            /* 内边距 */
+        }
+
+        /* 样式用于导航链接 */
+        .sidebar a {
+            display: block;
+            margin-bottom: 10px;
+            /* 链接之间的垂直间距 */
+            text-decoration: none;
+        }
+
+        /* 样式用于活动链接 */
+        .sidebar a.active {
+            font-weight: bold;
+        }
+
+        /* 主内容区域的样式 */
+        .content {
+            margin-top: 20px;
+            /* 设置上边距为20像素 */
+            margin-right: 80px;
+            /* 设置右边距为30像素 */
+            margin-bottom: 20px;
+            /* 设置下边距为20像素 */
+            margin-left: 360px;
+            /* 设置左边距为30像素 */
+            padding: 20px;
+            /* 内边距 */
+
+            font-family: Verdana, sans-serif;
+        }
+
+        /* 设置li元素的行间距 */
+        .content li {
+            font-size: 18px;
+            line-height: 2;
+            /* 自定义行间距，可以根据需要进行调整 */
+        }
+
+        /* 公式部分 */
+        .formula {
+            font-size: 22px;
+            margin-top: 28px;
+            margin-bottom: 26px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <!-- 左侧导航栏 -->
+    <div class="sidebar">
+        <h2>Electrodynamics — Electrostatic Field (Electric Potential, Laplace&#39;s Equation)</h2>
+        <ul>
+            <li><a href="#section1">Potential</a></li>
+            <li><a href="#section2">2D-Poisson&#39;s Equation and Laplace&#39;s Equation</a></li>
+            <!-- <li><a href="#section3">Section 3</a></li> -->
+        </ul>
+    </div>
+
+    <div class="content">
+        <h1 style="text-align: center;">Electrodynamics — Electrostatic Field (Electric Potential, Laplace&#39;s
+            Equation)</h1>
+        <h2 id="section1">1. <strong>Potential</strong></h2>
+        <ul>
+            <li>It is known that the curl of all electrostatic fields is zero, and the vector fields with zero curl are
+                the
+                gradient of some scalar ——potential.</li>
+
+        </ul>
+        <ul>
+            <li>Definition：</li>
+
+            <p class="formula"> <math xmlns='http://www.w3.org/1998/Math/MathML'>
+                    <mi> V </mi>
+                    <mrow>
+                        <mo> ( </mo>
+                        <mi> r </mi>
+                        <mo> ) </mo>
+                    </mrow>
+                    <mo> = </mo>
+                    <msubsup>
+                        <mrow>
+                            <mo> &#x222B; <!-- integral --> </mo>
+                        </mrow>
+                        <mrow>
+                            <mn> O </mn>
+                        </mrow>
+                        <mrow>
+                            <mi> r </mi>
+                        </mrow>
+                    </msubsup>
+                    <mi> E </mi>
+                    <mo> &#x00B7; <!-- middle dot --> </mo>
+                    <mi> dl </mi>
+                </math></p>
+        </ul>
+        <ul>
+            <li>The potential difference between two points <em>a</em> and <em>b</em> is denoted as: </li>
+
+            <p class="formula"> <math xmlns='http://www.w3.org/1998/Math/MathML'>
+                    <mi> V </mi>
+                    <mrow>
+                        <mo> ( </mo>
+                        <mi> b </mi>
+                        <mo> ) </mo>
+                    </mrow>
+                    <mo> - </mo>
+                    <mi> V </mi>
+                    <mrow>
+                        <mo> ( </mo>
+                        <mi> a </mi>
+                        <mo> ) </mo>
+                    </mrow>
+                    <mo> = </mo>
+                    <mo> - </mo>
+                    <munderover>
+                        <mrow>
+                            <mo> &#x222B; <!-- integral --> </mo>
+                        </mrow>
+                        <mrow>
+                            <mi> a </mi>
+                        </mrow>
+                        <mrow>
+                            <mi> b </mi>
+                        </mrow>
+                    </munderover>
+                    <mi> E </mi>
+                    <mo> &#x00B7; <!-- middle dot --> </mo>
+                    <mi> dl </mi>
+                </math></p>
+        </ul>
+        <ul>
+            <li>Correspondingly：</li>
+
+            <p class="formula"> <math xmlns='http://www.w3.org/1998/Math/MathML'>
+
+                    <mi> E </mi>
+                    <mo> = </mo>
+                    <mo> - </mo>
+                    <mo> &#x2207; <!-- nabla --> </mo>
+                    <mi> V </mi>
+                </math></p>
+        </ul>
+
+        <h2 id="section2">2. Poisson&#39;s Equation and Laplace&#39;s Equation</h2>
+        <ul>
+            <li>We know <math xmlns='http://www.w3.org/1998/Math/MathML'>
+                    <mi> E </mi>
+                    <mo> = </mo>
+                    <mo> - </mo>
+                    <mo> &#x2207; <!-- nabla --> </mo>
+                    <mi> V </mi>
+                </math> by Gauss&#39;s Law:<math xmlns='http://www.w3.org/1998/Math/MathML'>
+                    <mo> &#x2207; <!-- nabla --> </mo>
+                    <mo> &#x00B7; <!-- middle dot --> </mo>
+                    <mi> E </mi>
+                    <mo> = </mo>
+                    <mfrac>
+                        <mrow>
+                            <mi> &#x03C1; <!-- greek small letter rho --> </mi>
+                        </mrow>
+                        <mrow>
+                            <msub>
+                                <mrow>
+                                    <mi> &#x03B5; <!-- greek small letter epsilon --> </mi>
+                                </mrow>
+                                <mrow>
+                                    <mn> 0 </mn>
+                                </mrow>
+                            </msub>
+                        </mrow>
+                    </mfrac>
+                </math>，so we can get:</li>
+
+            <p class="formula"><math xmlns='http://www.w3.org/1998/Math/MathML'>
+                    <msup>
+                        <mrow>
+                            <mo> &#x2207; <!-- nabla --> </mo>
+                        </mrow>
+                        <mrow>
+                            <mn> 2 </mn>
+                        </mrow>
+                    </msup>
+                    <mi> V </mi>
+                    <mo> = </mo>
+                    <mfrac>
+                        <mrow>
+                            <mi> &#x03C1; <!-- greek small letter rho --> </mi>
+                        </mrow>
+                        <mrow>
+                            <msub>
+                                <mrow>
+                                    <mi> &#x03B5; <!-- greek small letter epsilon --> </mi>
+                                </mrow>
+                                <mrow>
+                                    <mn> 0 </mn>
+                                </mrow>
+                            </msub>
+                        </mrow>
+                    </mfrac>
+                </math></p>
+
+            <p style="font-size: 18px; line-height: 2;"> This equation is called the Poisson&#39;s equation. </p>
+        </ul>
+        <ul>
+            <li>When the charge within the surface is zero, the Poisson&#39;s equation simplifies to the Laplace&#39;s
+                equation:</li>
+
+            <p class="formula"><math xmlns='http://www.w3.org/1998/Math/MathML'>
+                    <msup>
+                        <mrow>
+                            <mo> &#x2207; <!-- nabla --> </mo>
+                        </mrow>
+                        <mrow>
+                            <mn> 2 </mn>
+                        </mrow>
+                    </msup>
+                    <mi> V </mi>
+                    <mo> = </mo>
+                    <mn> 0 </mn>
+                </math></p>
+        </ul>
+        <ul>
+            <li><math xmlns='http://www.w3.org/1998/Math/MathML'>
+                    <mfrac>
+                        <mrow>
+                            <mo> &#x2202; <!-- partial differential --> </mo>
+                            <mi> u </mi>
+                        </mrow>
+                        <mrow>
+                            <mo> &#x2202; <!-- partial differential --> </mo>
+                            <mi> t </mi>
+                        </mrow>
+                    </mfrac>
+                    <mo> = </mo>
+                    <msup>
+                        <mrow>
+                            <mi> a </mi>
+                        </mrow>
+                        <mrow>
+                            <mn> 2 </mn>
+                        </mrow>
+                    </msup>
+                    <mrow>
+                        <mo> ( </mo>
+                        <mfrac>
+                            <mrow>
+                                <msup>
+                                    <mrow>
+                                        <mo> &#x2202; <!-- partial differential --> </mo>
+                                    </mrow>
+                                    <mrow>
+                                        <mn> 2 </mn>
+                                    </mrow>
+                                </msup>
+                                <mi> u </mi>
+                            </mrow>
+                            <mrow>
+                                <mo> &#x2202; <!-- partial differential --> </mo>
+                                <msup>
+                                    <mrow>
+                                        <mi> x </mi>
+                                    </mrow>
+                                    <mrow>
+                                        <mn> 2 </mn>
+                                    </mrow>
+                                </msup>
+                            </mrow>
+                        </mfrac>
+                        <mo> + </mo>
+                        <mfrac>
+                            <mrow>
+                                <msup>
+                                    <mrow>
+                                        <mo> &#x2202; <!-- partial differential --> </mo>
+                                    </mrow>
+                                    <mrow>
+                                        <mn> 2 </mn>
+                                    </mrow>
+                                </msup>
+                                <mi> u </mi>
+                            </mrow>
+                            <mrow>
+                                <mo> &#x2202; <!-- partial differential --> </mo>
+                                <msup>
+                                    <mrow>
+                                        <mi> y </mi>
+                                    </mrow>
+                                    <mrow>
+                                        <mn> 2 </mn>
+                                    </mrow>
+                                </msup>
+                            </mrow>
+                        </mfrac>
+                        <mo> ) </mo>
+                    </mrow>
+                    <mo> + </mo>
+                    <mi> f </mi>
+                    <mrow>
+                        <mo> ( </mo>
+                        <mi> x </mi>
+                        <mo> , </mo>
+                        <mi> y </mi>
+                        <mo> , </mo>
+                        <mi> t </mi>
+                        <mo> ) </mo>
+                    </mrow>
+                </math> : In this equation, <math xmlns='http://www.w3.org/1998/Math/MathML' style="font-size: 20px;">
+                    <mi> f </mi>
+                    <mrow>
+                        <mo> ( </mo>
+                        <mi> x </mi>
+                        <mo> , </mo>
+                        <mi> y </mi>
+                        <mo> , </mo>
+                        <mi> t </mi>
+                        <mo> ) </mo>
+                    </mrow>
+                </math>represents the heat source, and the parameter <math xmlns='http://www.w3.org/1998/Math/MathML'
+                    style="font-size: 21px;">
+                    <msup>
+                        <mrow>
+                            <mi> a </mi>
+                        </mrow>
+                        <mrow>
+                            <mn> 2 </mn>
+                        </mrow>
+                    </msup>
+                </math> is a constant. It is known that the heat conduction equation evolves over time, transitioning to
+                a state
+                where the temperature is independent of time and tends towards stability. Under natural conditions, the
+                heat source will also evolve into a function independent of time.
+            </li>
+
+        </ul>
+        <ul>
+            <li>By the same logic, determine the Laplace&#39;s equation for the electrostatic field. When independent of
+                time, the equation is <math xmlns='http://www.w3.org/1998/Math/MathML'>
+                    <mrow>
+                        <mo> ( </mo>
+                        <mfrac>
+                            <mrow>
+                                <msup>
+                                    <mrow>
+                                        <mo> &#x2202; <!-- partial differential --> </mo>
+                                    </mrow>
+                                    <mrow>
+                                        <mn> 2 </mn>
+                                    </mrow>
+                                </msup>
+                                <mi> u </mi>
+                            </mrow>
+                            <mrow>
+                                <mo> &#x2202; <!-- partial differential --> </mo>
+                                <msup>
+                                    <mrow>
+                                        <mi> x </mi>
+                                    </mrow>
+                                    <mrow>
+                                        <mn> 2 </mn>
+                                    </mrow>
+                                </msup>
+                            </mrow>
+                        </mfrac>
+                        <mo> + </mo>
+                        <mfrac>
+                            <mrow>
+                                <msup>
+                                    <mrow>
+                                        <mo> &#x2202; <!-- partial differential --> </mo>
+                                    </mrow>
+                                    <mrow>
+                                        <mn> 2 </mn>
+                                    </mrow>
+                                </msup>
+                                <mi> u </mi>
+                            </mrow>
+                            <mrow>
+                                <mo> &#x2202; <!-- partial differential --> </mo>
+                                <msup>
+                                    <mrow>
+                                        <mi> y </mi>
+                                    </mrow>
+                                    <mrow>
+                                        <mn> 2 </mn>
+                                    </mrow>
+                                </msup>
+                            </mrow>
+                        </mfrac>
+                        <mo> ) </mo>
+                    </mrow>
+                    <mo> = </mo>
+                    <mo> - </mo>
+                    <mfrac>
+                        <mrow>
+                            <mn> 1 </mn>
+                        </mrow>
+                        <mrow>
+                            <msup>
+                                <mrow>
+                                    <mi> a </mi>
+                                </mrow>
+                                <mrow>
+                                    <mn> 2 </mn>
+                                </mrow>
+                            </msup>
+                        </mrow>
+                    </mfrac>
+                    <mi> f </mi>
+                    <mrow>
+                        <mo> ( </mo>
+                        <mi> x </mi>
+                        <mo> , </mo>
+                        <mi> y </mi>
+                        <mo> ) </mo>
+                    </mrow>
+                </math>, let <math xmlns='http://www.w3.org/1998/Math/MathML' style="font-size: 22px;">
+                    <msup>
+                        <mrow>
+                            <mi> a </mi>
+                        </mrow>
+                        <mrow>
+                            <mn> 2 </mn>
+                        </mrow>
+                    </msup>
+                    <mo> = </mo>
+                    <mi> &#x03B5; <!-- greek small letter epsilon --> </mi>
+                </math>
+                , and <math xmlns='http://www.w3.org/1998/Math/MathML' style="font-size: 19px;">
+                    <mi> f </mi>
+                    <mrow>
+                        <mo> ( </mo>
+                        <mi> x </mi>
+                        <mo> , </mo>
+                        <mi> y </mi>
+                        <mo> ) </mo>
+                    </mrow>
+                    <mo> = </mo>
+                    <mi> &#x03C1; <!-- greek small letter rho --> </mi>
+                    <mrow>
+                        <mo> ( </mo>
+                        <mi> x </mi>
+                        <mo> , </mo>
+                        <mi> y </mi>
+                        <mo> ) </mo>
+                    </mrow>
+                </math>
+                . </li>
+
+        </ul>
+        <ul>
+            <li>Poisson&#39;s equation:<math xmlns='http://www.w3.org/1998/Math/MathML'>
+                    <mrow>
+                        <mo> ( </mo>
+                        <mfrac>
+                            <mrow>
+                                <msup>
+                                    <mrow>
+                                        <mo> &#x2202; <!-- partial differential --> </mo>
+                                    </mrow>
+                                    <mrow>
+                                        <mn> 2 </mn>
+                                    </mrow>
+                                </msup>
+                                <mi> V </mi>
+                            </mrow>
+                            <mrow>
+                                <mo> &#x2202; <!-- partial differential --> </mo>
+                                <msup>
+                                    <mrow>
+                                        <mi> x </mi>
+                                    </mrow>
+                                    <mrow>
+                                        <mn> 2 </mn>
+                                    </mrow>
+                                </msup>
+                            </mrow>
+                        </mfrac>
+                        <mo> + </mo>
+                        <mfrac>
+                            <mrow>
+                                <msup>
+                                    <mrow>
+                                        <mo> &#x2202; <!-- partial differential --> </mo>
+                                    </mrow>
+                                    <mrow>
+                                        <mn> 2 </mn>
+                                    </mrow>
+                                </msup>
+                                <mi> V </mi>
+                            </mrow>
+                            <mrow>
+                                <mo> &#x2202; <!-- partial differential --> </mo>
+                                <msup>
+                                    <mrow>
+                                        <mi> y </mi>
+                                    </mrow>
+                                    <mrow>
+                                        <mn> 2 </mn>
+                                    </mrow>
+                                </msup>
+                            </mrow>
+                        </mfrac>
+                        <mo> ) </mo>
+                    </mrow>
+                    <mo> = </mo>
+                    <mo> - </mo>
+                    <mfrac>
+                        <mrow>
+                            <mi> &#x03C1; <!-- greek small letter rho --> </mi>
+                            <mrow>
+                                <mo> ( </mo>
+                                <mi> x </mi>
+                                <mo> , </mo>
+                                <mi> y </mi>
+                                <mo> ) </mo>
+                            </mrow>
+                        </mrow>
+                        <mrow>
+                            <mi> &#x03B5; <!-- greek small letter epsilon --> </mi>
+                        </mrow>
+                    </mfrac>
+                </math></li>
+
+        </ul>
+        <ul>
+            <li>When ρ(x,y)=0: <math xmlns='http://www.w3.org/1998/Math/MathML'>
+                    <mrow>
+                        <mo> ( </mo>
+                        <mfrac>
+                            <mrow>
+                                <msup>
+                                    <mrow>
+                                        <mo> &#x2202; <!-- partial differential --> </mo>
+                                    </mrow>
+                                    <mrow>
+                                        <mn> 2 </mn>
+                                    </mrow>
+                                </msup>
+                                <mi> V </mi>
+                            </mrow>
+                            <mrow>
+                                <mo> &#x2202; <!-- partial differential --> </mo>
+                                <msup>
+                                    <mrow>
+                                        <mi> x </mi>
+                                    </mrow>
+                                    <mrow>
+                                        <mn> 2 </mn>
+                                    </mrow>
+                                </msup>
+                            </mrow>
+                        </mfrac>
+                        <mo> + </mo>
+                        <mfrac>
+                            <mrow>
+                                <msup>
+                                    <mrow>
+                                        <mo> &#x2202; <!-- partial differential --> </mo>
+                                    </mrow>
+                                    <mrow>
+                                        <mn> 2 </mn>
+                                    </mrow>
+                                </msup>
+                                <mi> V </mi>
+                            </mrow>
+                            <mrow>
+                                <mo> &#x2202; <!-- partial differential --> </mo>
+                                <msup>
+                                    <mrow>
+                                        <mi> y </mi>
+                                    </mrow>
+                                    <mrow>
+                                        <mn> 2 </mn>
+                                    </mrow>
+                                </msup>
+                            </mrow>
+                        </mfrac>
+                        <mo> ) </mo>
+                    </mrow>
+                    <mo> = </mo>
+                    <mn> 0 </mn>
+                </math>, is Laplace&#39;s equation.</li>
+
+
+        </ul>
+        <p><img src="./image/simulation.gif" alt="1" width="600"></p>
+        <p style="margin-left: 10px;"><img src="./image/ElectricField.png" alt="1" width="580"></p>
+        <ul>
+            <li> When ρ(x,y)≠0: <math xmlns='http://www.w3.org/1998/Math/MathML'>
+                    <mrow>
+                        <mo> ( </mo>
+                        <mfrac>
+                            <mrow>
+                                <msup>
+                                    <mrow>
+                                        <mo> &#x2202; <!-- partial differential --> </mo>
+                                    </mrow>
+                                    <mrow>
+                                        <mn> 2 </mn>
+                                    </mrow>
+                                </msup>
+                                <mi> V </mi>
+                            </mrow>
+                            <mrow>
+                                <mo> &#x2202; <!-- partial differential --> </mo>
+                                <msup>
+                                    <mrow>
+                                        <mi> x </mi>
+                                    </mrow>
+                                    <mrow>
+                                        <mn> 2 </mn>
+                                    </mrow>
+                                </msup>
+                            </mrow>
+                        </mfrac>
+                        <mo> + </mo>
+                        <mfrac>
+                            <mrow>
+                                <msup>
+                                    <mrow>
+                                        <mo> &#x2202; <!-- partial differential --> </mo>
+                                    </mrow>
+                                    <mrow>
+                                        <mn> 2 </mn>
+                                    </mrow>
+                                </msup>
+                                <mi> V </mi>
+                            </mrow>
+                            <mrow>
+                                <mo> &#x2202; <!-- partial differential --> </mo>
+                                <msup>
+                                    <mrow>
+                                        <mi> y </mi>
+                                    </mrow>
+                                    <mrow>
+                                        <mn> 2 </mn>
+                                    </mrow>
+                                </msup>
+                            </mrow>
+                        </mfrac>
+                        <mo> ) </mo>
+                    </mrow>
+                    <mo> = </mo>
+                    <mo> - </mo>
+                    <mfrac>
+                        <mrow>
+                            <mi> &#x03C1; <!-- greek small letter rho --> </mi>
+                            <mrow>
+                                <mo> ( </mo>
+                                <mi> x </mi>
+                                <mo> , </mo>
+                                <mi> y </mi>
+                                <mo> ) </mo>
+                            </mrow>
+                        </mrow>
+                        <mrow>
+                            <mi> &#x03B5; <!-- greek small letter epsilon --> </mi>
+                        </mrow>
+                    </mfrac>
+                </math>, is Poisson&#39;s equation.</li>
+            <p style="font-size: 18px; line-height: 2;">In calculating the Poisson&#39;s equation, we introduced two
+                point charges, a positive charge and a
+                negative charge.</p>
+
+        </ul>
+        <p><img src="./image/simulation2.gif" alt="2" width="600"></p>
+        <p><img src="./image/ElectricField2.png" alt="2" width="600"></p>
+        <p>[code]</p>
+        <p>&nbsp;</p>
+
+        <ul>
+            <li>Set boundaries equals to 0.</li>
+        </ul>
+        <p><img src="./image/simulation3.gif" alt="3" width="600"></p>
+        <p><img src="./image/ElectricField3.png" alt="3" width="600"></p>
+
+    </div>
+</body>
+
+</html>
