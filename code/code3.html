@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="icon" href="../image/EM.png">
+    <style>
+        pre {
+            font-family: 'Roboto Mono', Courier, monospace !important;
+            font-size: 16px;
+            font-weight: normal !important;
+        }
+    </style>
+</head>
+
+<body>
+    <h3><a href="../phys.html">Back to main page</a></h3>
+    <!-- HTML generated using hilite.me -->
+    <div
+        style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+        <pre style="margin: 0; line-height: 125%"><span style="color: #008800; font-style: italic">% Clear workspace, command window, and close all figures</span>
+clear,clc,close all
+
+<span style="color: #008800; font-style: italic">% Define spatial step sizes and domain boundaries</span>
+dx=<span style="color: #0000FF">0.06</span>;
+Lx=<span style="color: #0000FF">1</span>;
+x=<span style="color: #0000FF">0</span>:dx:Lx;
+dy=<span style="color: #0000FF">0.06</span>;
+Ly=<span style="color: #0000FF">1</span>;
+y=<span style="color: #0000FF">0</span>:dy:Ly;
+
+<span style="color: #008800; font-style: italic">% Define boundary conditions for the potential field (all set to zero)</span>
+m1=<span style="color: #0000FF">0</span>*sin(pi*x/Lx);  <span style="color: #008800; font-style: italic">% Left boundary</span>
+m2=<span style="color: #0000FF">0</span>*sin(pi*x/Lx);  <span style="color: #008800; font-style: italic">% Right boundary</span>
+m3=<span style="color: #0000FF">0</span>*y&#39;;            <span style="color: #008800; font-style: italic">% Top boundary</span>
+m4=<span style="color: #0000FF">0</span>*y&#39;;            <span style="color: #008800; font-style: italic">% Bottom boundary</span>
+
+<span style="color: #008800; font-style: italic">% Construct finite difference matrices for spatial derivatives</span>
+A1=-<span style="color: #0000FF">2</span>*eye(length(x))+diag(ones(<span style="color: #0000FF">1</span>,length(x)-<span style="color: #0000FF">1</span>),<span style="color: #0000FF">1</span>)+diag(ones(<span style="color: #0000FF">1</span>,length(x)-<span style="color: #0000FF">1</span>),-<span style="color: #0000FF">1</span>);
+A2=-<span style="color: #0000FF">2</span>*eye(length(y))+diag(ones(<span style="color: #0000FF">1</span>,length(y)-<span style="color: #0000FF">1</span>),<span style="color: #0000FF">1</span>)+diag(ones(<span style="color: #0000FF">1</span>,length(y)-<span style="color: #0000FF">1</span>),-<span style="color: #0000FF">1</span>);
+
+<span style="color: #008800; font-style: italic">% Define time step and temporal domain</span>
+dt=<span style="color: #0000FF">0.0001</span>;
+t=<span style="color: #0000FF">0</span>:dt:<span style="color: #0000FF">0.2</span>;
+
+<span style="color: #008800; font-style: italic">% Create a mesh grid for spatial domain</span>
+[Y,X]=meshgrid(y,x);
+
+<span style="color: #008800; font-style: italic">% Initial potential distribution (Gaussian centered at 1/2 distance)</span>
+U0=exp(-<span style="color: #0000FF">10</span>*((X-<span style="color: #0000FF">1</span>/<span style="color: #0000FF">2</span>).^<span style="color: #0000FF">2</span>+(Y-<span style="color: #0000FF">1</span>/<span style="color: #0000FF">2</span>).^<span style="color: #0000FF">2</span>));
+U=U0;
+
+<span style="color: #008800; font-style: italic">% Define constants for the simulation</span>
+e0=<span style="color: #0000FF">1</span>;
+D=<span style="color: #0000FF">0.1</span>;
+
+<span style="color: #008800; font-style: italic">% Charge distribution: difference of two Gaussians centered at 1/2 and 1/4 distances</span>
+rou=exp(-((X-<span style="color: #0000FF">1</span>/<span style="color: #0000FF">2</span>).^<span style="color: #0000FF">2</span>+(Y-<span style="color: #0000FF">1</span>/<span style="color: #0000FF">2</span>).^<span style="color: #0000FF">2</span>)/D^<span style="color: #0000FF">2</span>) - exp(-((X-<span style="color: #0000FF">1</span>/<span style="color: #0000FF">4</span>).^<span style="color: #0000FF">2</span>+(Y-<span style="color: #0000FF">1</span>/<span style="color: #0000FF">4</span>).^<span style="color: #0000FF">2</span>)/D^<span style="color: #0000FF">2</span>);
+
+<span style="color: #008800; font-style: italic">% Path to save the output GIF</span>
+filename = <span style="color: #0000FF">&#39;C:\Users\csw00\simulation3.gif&#39;</span>;
+
+<span style="color: #008800; font-style: italic">% Time-stepping loop for updating the potential field</span>
+<span style="color: #000080; font-weight: bold">for</span> n=<span style="color: #0000FF">1</span>:length(t)-<span style="color: #0000FF">1</span>
+
+    <span style="color: #008800; font-style: italic">% Update potential field using finite difference method</span>
+    U=U+(e0^<span style="color: #0000FF">2</span>*(<span style="color: #0000FF">1</span>/dx^<span style="color: #0000FF">2</span>*A1*U+<span style="color: #0000FF">1</span>/dy^<span style="color: #0000FF">2</span>*U*A2)+rou)*dt;
+
+    <span style="color: #008800; font-style: italic">% Apply boundary conditions</span>
+    U(:,<span style="color: #0000FF">1</span>)=m1;
+    U(:,<span style="color: #000080; font-weight: bold">end</span>)=m2;
+    U(<span style="color: #0000FF">1</span>,:)=m3;
+    U(<span style="color: #000080; font-weight: bold">end</span>,:)=m4;
+
+    <span style="color: #008800; font-style: italic">% Visualize the potential field at specified intervals and save to GIF</span>
+    <span style="color: #000080; font-weight: bold">if</span> mod(n,<span style="color: #0000FF">100</span>)==<span style="color: #0000FF">1</span>
+        surf(X,Y,U)
+        axis([x(<span style="color: #0000FF">1</span>) x(<span style="color: #000080; font-weight: bold">end</span>) y(<span style="color: #0000FF">1</span>) y(<span style="color: #000080; font-weight: bold">end</span>) -<span style="color: #0000FF">1</span> <span style="color: #0000FF">3</span>])
+        drawnow;
+
+        <span style="color: #008800; font-style: italic">% Capture the current frame</span>
+        frame = getframe(gcf);
+        im = frame2im(frame);
+        [imind, cm] = rgb2ind(im, <span style="color: #0000FF">256</span>);
+
+        <span style="color: #008800; font-style: italic">% Write the frame to the GIF file</span>
+        <span style="color: #000080; font-weight: bold">if</span> n == <span style="color: #0000FF">1</span>
+            imwrite(imind, cm, filename, <span style="color: #0000FF">&#39;gif&#39;</span>, <span style="color: #0000FF">&#39;Loopcount&#39;</span>, inf, <span style="color: #0000FF">&#39;DelayTime&#39;</span>, <span style="color: #0000FF">0.5</span>);
+        <span style="color: #000080; font-weight: bold">else</span>
+            imwrite(imind, cm, filename, <span style="color: #0000FF">&#39;gif&#39;</span>, <span style="color: #0000FF">&#39;WriteMode&#39;</span>, <span style="color: #0000FF">&#39;append&#39;</span>, <span style="color: #0000FF">&#39;DelayTime&#39;</span>, <span style="color: #0000FF">0.5</span>);
+        <span style="color: #000080; font-weight: bold">end</span>
+    <span style="color: #000080; font-weight: bold">end</span>
+<span style="color: #000080; font-weight: bold">end</span>
+
+<span style="color: #008800; font-style: italic">% Plotting electric field intensity and potential contours</span>
+figure
+
+<span style="color: #008800; font-style: italic">% Compute the electric field intensity</span>
+[Ex,Ey]=gradient(-U,dx,dx);
+
+<span style="color: #008800; font-style: italic">% Plot equipotential lines</span>
+contour(X,Y,U);
+
+hold on
+
+<span style="color: #008800; font-style: italic">% Plot electric field vectors</span>
+quiver(X,Y,Ex,Ey);
+
+axis equal
+title(<span style="color: #0000FF">&#39;Electric Field Intensity and Potential Contours&#39;</span>);
+xlabel(<span style="color: #0000FF">&#39;X-axis&#39;</span>);
+ylabel(<span style="color: #0000FF">&#39;Y-axis&#39;</span>);
+
+<span style="color: #008800; font-style: italic">% Save the visualization as a PNG image</span>
+saveas(gcf, <span style="color: #0000FF">&#39;C:\Users\csw00\ElectricField3.png&#39;</span>);
+</pre>
+    </div>
+
+</body>
+
+</html>
